@@ -15,6 +15,7 @@ function calcBMI(weight, height) {
             break;
         case BMI >= 35 && BMI < 40:
             console.log("You are obesity class 2");
+            break;
         default:
             console.log("You are obesity class 3");
     }
