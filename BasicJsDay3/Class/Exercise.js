@@ -5,13 +5,7 @@ function doubleArrayValue(arr) {
 doubleArrayValue([1, 2, 3, 4]);
 
 function evenArrNumber(arr) {
-    var arr2 = [];
-    for (let i = 0; i <= arr.length; i++) {
-        if (arr[i] % 2 === 0) {
-            arr2.push(arr[i]);
-        }
-    }
-    console.log(arr2);
+    console.log(arr.filter(x => x % 2 === 0));
 }
 
 evenArrNumber([1, 2, 3, 4]);
