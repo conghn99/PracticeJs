@@ -11,9 +11,13 @@ function arrToString(arr) {
     // }
     // console.log(strings);
 
-    finalElement = arr.pop();
-    var strings = arr.join(", ");
-    console.log(`${strings} và ${finalElement}`);
+    if (arr.length === 1) {
+        console.log(arr[0]);
+    } else {
+        finalElement = arr.pop();
+        var strings = arr.join(", ");
+        console.log(`${strings} và ${finalElement}`);
+    }
 }
 
-arrToString(["Đạt", "Hiếu", "Đoàn", "Vượng"]);
+arrToString(["Đạt", "Hiếu"]);
