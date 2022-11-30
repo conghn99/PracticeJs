@@ -48,31 +48,41 @@ console.log(products.filter(x => x.price > 20000000));
 console.log(products.filter(x => x.name.toLowerCase().includes("pro")));
 
 // 6. Thêm 1 sản phẩm bất kỳ vào trong mảng product
-products.push({
-    name: "Xiaomi 13 Pro",
-    price: 45000000,
-    brand: "Xiaomi",
-    count: 2,
-});
-console.log(products);
+function addProduct(name, price, brand, count) {
+    products.push({
+        name: name,
+        price: price,
+        brand: brand,
+        count: count,
+    });
+    console.log(products);
+}
 
 // 7. Xóa tất cả sản phẩm của thương hiệu "Samsung" trong giỏ hàng
-products = products.filter(x => x.brand !== "Samsung");
-console.log(products);
+function removeSamsungProduct(arr) {
+    arr = arr.filter(x => x.brand !== "Samsung");
+    console.log(arr);
+}
 
 // 8. Sắp xếp giỏ hàng theo price tăng dần
-products.sort((a, b) => a.price - b.price);
-console.log(products);
+function sortAscendPrice(arr) {
+    arr.sort((a, b) => a.price - b.price);
+    console.log(arr);
+}
 
 // 9. Sắp xếp giỏ hàng theo count giảm dần
-products.sort((a, b) => b.count- a.count);
-console.log(products);
+function sortDescendCount(arr) {
+    arr.sort((a, b) => b.count- a.count);
+    console.log(arr);
+}
 
 // 10. Lấy ra 2 sản phẩm bất kỳ trong giỏ hàng
-for (let i = products.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    var temp = products[i];
-    products[i] = products[j];
-    products[j] = temp;
+function getTwoRandomProducts(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        var temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    console.log(arr.slice(0, 2));
 }
-console.log(products.slice(0, 2));
