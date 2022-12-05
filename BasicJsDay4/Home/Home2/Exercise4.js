@@ -1,8 +1,8 @@
 // Bài 1
 var ulList = document.querySelectorAll("ul");
 for (var i = 0; i < ulList.length; i++) {
-    ulList[i].firstElementChild.innerText = "first";
-    ulList[i].lastElementChild.innerText = "last";
+    ulList[i].firstElementChild.textContent = "first";
+    ulList[i].lastElementChild.textContent = "last";
 }
 
 // Bài 2
