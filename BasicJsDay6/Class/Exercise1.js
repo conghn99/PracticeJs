@@ -57,9 +57,9 @@ but3.addEventListener("click", () => {
 })
 
 // Bai 4
-document.body.addEventListener("click", (events) => {
-    events.target = document.createElement("div");
-    events.target.innerHTML = `<div class="main1">
-    <div class="square"></div>
-</div>`;
-})
+// document.body.addEventListener("click", (events) => {
+//     events.target = document.createElement("div");
+//     events.target.innerHTML = `<div class="main1">
+//     <div class="square"></div>
+// </div>`;
+// })
