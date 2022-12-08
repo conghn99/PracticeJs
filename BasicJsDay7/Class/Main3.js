@@ -9,8 +9,8 @@ function getBreedList() {
         .then((resp) => {
             renderBreed(resp.data.message)
         })
-        .catch((errors) => {
-            console.log(errors)
+        .catch(() => {
+            console.log("errors")
         })
 }
 
@@ -46,7 +46,7 @@ function getSubBreedList(list, content) {
     } else {
         for (let i = 0; i < list.length; i++) {
             let type = document.createElement("li");
-            type.innerHTML= `<a href="https://dog.ceo/api/breed/${content}/${list[i]}/images/random">${list[i]}</a>`;
+            type.innerHTML= `<a href="#">${list[i]}</a>`;
             ul.appendChild(type);
         }
     }
