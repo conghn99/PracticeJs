@@ -31,14 +31,14 @@ btn.addEventListener("click", function () {
     apis
         .then((resp) => {
             console.log(resp.data.message)
-            getSubBreedList(resp.data.message, content)
+            getSubBreedList(resp.data.message)
         })
         .catch(() => {
             console.log("error")
         })
 })
 
-function getSubBreedList(list, content) {
+function getSubBreedList(list) {
     if (list.length === 0) {
         let type = document.createElement("li");
         type.innerText = "Không có sub breed";
