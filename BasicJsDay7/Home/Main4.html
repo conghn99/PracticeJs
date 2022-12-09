@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #d0fae4;
+        }
+        h2 {
+            color: #228e63;
+            text-align: center;
+        }
+        .di1 {
+            text-align: center;
+        }
+        .di2 {
+            position: absolute;
+            top: 15%;
+            left: 35%;
+            margin-top: -50px;
+            margin-left: -50px;
+            width: 500px;
+            height: 100px;
+        }
+        #btn {
+            color: white;
+            background-color: #009865;
+            border-style: ridge;
+            border-color: transparent;
+            border-radius: 3px;
+        }
+        #word {
+            border-color: green;
+            border-radius: 3px;
+        }
+        .content {
+            background-color: #f3f4f6;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border-color: #d0fae4;
+            border-style: groove;
+        }
+        p {
+            font-size: large;
+            color: #a9abad;
+        }
+        audio {
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Dictionary</h2>
+    <div class="di1">
+        <input type="text" id="word" placeholder="Enter the word">
+        <button id="btn">Search</button>
+    </div>
+    <div class="di2">
+
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./Main4.js"></script>
+</body>
+</html>
