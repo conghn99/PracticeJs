@@ -7,7 +7,7 @@ const div = document.getElementById("divmain");
 btn.addEventListener("click", () => {
     div.innerHTML = '';
     let val = inp.value;
-    let apis = axios.get(`https://api.weatherbit.io/v2.0/current?city=${val}&key=d9e0abf6205f408db0e3978faa96c84a&include=minutely`);
+    let apis = axios.get(`https://api.weatherbit.io/v2.0/current?city=${val}&key=7b8f59e21ccd449a99e5b146196f9c35`);
     apis
         .then((resp) => {
             console.log(resp.data.data[0])
@@ -38,7 +38,7 @@ function getInfo(resp) {
         <span id="rise">${resp.sunrise}</span>
         <p>Sunset time: </p>
         <span id="set">${resp.sunset}</span>
-        <p>Icon: </p>
+        <p>Weather status: </p>
         <img src="https://www.weatherbit.io/static/img/icons/${resp.weather.icon}.png">
         <br>
         <button onclick="remove(this)" id="remove" class="${resp.city_name}">Remove</button>`;
@@ -47,7 +47,7 @@ function getInfo(resp) {
 
 plus.addEventListener("click", () => {
     let val = inp.value;
-    let apis = axios.get(`https://api.weatherbit.io/v2.0/current?city=${val}&key=d9e0abf6205f408db0e3978faa96c84a&include=minutely`);
+    let apis = axios.get(`https://api.weatherbit.io/v2.0/current?city=${val}&key=7b8f59e21ccd449a99e5b146196f9c35`);
     apis
         .then((resp) => {
             if (div.childElementCount <= 2 && document.getElementById(`${resp.data.data[0].city_name}`) === null) {
@@ -68,15 +68,40 @@ function remove(events) {
 }
 
 refresh.addEventListener("click", () => {
-    div.innerHTML = '';
-    let val = inp.value;
-    let apis = axios.get(`https://api.weatherbit.io/v2.0/current?city=${val}&key=d9e0abf6205f408db0e3978faa96c84a&include=minutely`);
-    apis
-        .then((resp) => {
-            console.log(resp.data.data[0])
-            getInfo(resp.data.data[0])
-        })
-        .catch(() => {
-            console.log("error")
-        })
+    if (div.children.length !== 0) {
+        for (var i = 0; i < div.children.length; i++) {
+            let apis = axios.get(`https://api.weatherbit.io/v2.0/current?city=${div.children[i].getAttribute("class")}&key=7b8f59e21ccd449a99e5b146196f9c35`);
+            apis
+                .then((resp) => {
+                    console.log(resp.data.data[0])
+                    updateInfo(resp.data.data[0])
+                })
+                .catch(() => {
+                    console.log("error")
+                })
+        }
+    }
 })
+
+function updateInfo(resp) {
+    let type = document.getElementsByClassName(`${resp.city_name}`)[0];
+    type.innerHTML = `
+        <p>City: </p>
+        <span id="${resp.city_name}">${resp.city_name}</span>
+        <p>Current Time: </p>
+        <span id="time">${resp.ob_time.substring(0, 10)}</span>
+        <p>Date: </p>
+        <span id="date">${resp.ob_time.substring(11, 16)}</span>
+        <p>Temperature: </p>
+        <span id="temperature">${resp.temp}</span>
+        <p>Humidity: </p>
+        <span id="humidity">${resp.rh}</span>
+        <p>Sunrise time: </p>
+        <span id="rise">${resp.sunrise}</span>
+        <p>Sunset time: </p>
+        <span id="set">${resp.sunset}</span>
+        <p>Weather status: </p>
+        <img src="https://www.weatherbit.io/static/img/icons/${resp.weather.icon}.png">
+        <br>
+        <button onclick="remove(this)" id="remove" class="${resp.city_name}">Remove</button>`;
+}
