@@ -49,6 +49,11 @@
             height: 100%;
             object-fit: cover;
         }
+
+        .my-style {
+            border-color: red;
+            border-style: solid;
+        }
     </style>
 </head>
 
@@ -102,7 +107,7 @@
                     </div>
                 </div>
                 <div class="text-center mt-3">
-                    <button class="btn btn-secondary btn-back">Quay lại</button>
+                    <a href="./index.html" class="btn btn-secondary btn-back">Quay lại</a>
                     <button class="btn btn-success" id="btn-save">Cập nhật</button>
                 </div>
             </div>
@@ -156,7 +161,7 @@
                             </div>
                         </div>
                         <!-- Hiển thị danh sách ảnh -->
-                        <div class="image-container mt-4 mb-4">
+                        <div class="image-container mt-4 mb-4" id="display-img">
                             <div class="image-item">
                                 <img src="https://media.techmaster.vn/api/static/brbgh4451coepbqoch60/ilMUsWcN" alt="">
                             </div>
@@ -190,6 +195,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js" integrity="sha512-1zzZ0ynR2KXnFskJ1C2s+7TIEewmkB2y+5o/+ahF7mwNj9n3PnzARpqalvtjSbUETwx6yuxP5AJXZCpnjEJkQw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./main_detail.js"></script>
 </body>
 
 </html>
