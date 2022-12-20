@@ -8,15 +8,25 @@ const forgotPswd = document.getElementById("btn-forgot-password");
 const saveChange = document.getElementById("btn-save");
 const showImage = document.getElementById("btn-modal-image");
 const displayImage = document.getElementById("display-img");
+const delImage = document.getElementById("btn-delete-image");
+const btnChoseImg = document.getElementById("btn-chose-image");
+const avtPreview = document.getElementById("avatar-preview");
+const modalImgEl = new bootstrap.Modal(document.getElementById('modal-image'), {
+    keyboard: false
+})
+const avatarEl = document.getElementById("avatar");
 
-console.log(window.location.href);
-let lastIndexOf = window.location.href.lastIndexOf("=")
-let id = window.location.href.substring(lastIndexOf + 1);
+const params = new URLSearchParams(window.location.search);
+let id = params.get("id");
+if(!id) {
+    window.location.href = "./404.html"
+}
 
 const getCityList = async () => {
     try {
         let res = await axios.get("https://provinces.open-api.vn/api/p/");
         renderCity(res.data);
+        getUserInfo();
     } catch (error) {
         console.log(error);
     }
@@ -44,17 +54,15 @@ const getUserInfo = async () => {
     }
 }
 
-getUserInfo();
+
 
 const renderUserInfo = (info) => {
     fullname.value = info.name;
     email.value = info.email;
     phone.value = info.phone;
-    console.log(address)
-    console.log(address.length)
+    document.getElementById("avatar-preview").src = `http://localhost:8080${info.avatar}`;
     for (let i = 0; i < address.length; i++) {
         let option = address.options[i];
-        console.log(option)
         if (option.value == info.address) {
             const att = document.createAttribute("selected");
             option.setAttributeNode(att);
@@ -97,36 +105,123 @@ saveChange.addEventListener("click", async () => {
     }
 })
 
-showImage.addEventListener("click", async () => {
+let images = [];
+
+const getImage = async () => {
     try {
         displayImage.innerHTML = "";
         let res = await axios.get(`${API_URL}/users/${id}/files`);
-        console.log(res.data)
         if(res.data.length === 0) {
             displayImage.innerHTML = "Ko có ảnh nào"
         } else {
+            images = res.data;
+            renderPaginationAndRenderImage(res.data);   
+            // let html = "";
+            // res.data.forEach(dat => {
+            //     let src = `http://localhost:8080${dat}`;
+            //     let lastIndex = src.lastIndexOf("/");
+            //     let ids = src.substring(lastIndex + 1);
+            //     html += `<div class="image-item">
+            //                 <img src="${src}" id="${ids}" onclick=targetImg(this) alt="ảnh">
+            //             </div>`
+            // })
+            // displayImage.innerHTML = html
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+getImage()
+
+const renderPaginationAndRenderImage = arr => {
+    $('.pagination-container').pagination({
+        dataSource: arr,
+        pageSize : 8,
+        callback: function(data, pagination) {
             let html = "";
-            res.data.forEach(dat => {
+            data.forEach(dat => {
                 let src = `http://localhost:8080${dat}`;
                 let lastIndex = src.lastIndexOf("/");
                 let ids = src.substring(lastIndex + 1);
                 html += `<div class="image-item">
-                            <img src="${src}" id="${ids}" onclick=targetImg(this) alt="">
+                            <img src="${src}" id="${ids}" onclick=targetImg(this) alt="ảnh" data-url="${dat}">
                         </div>`
             })
-            displayImage.innerHTML = html
+            displayImage.innerHTML = html;
+            btnChoseImg.disabled = true;
+            delImage.disabled = true
+        }
+    })
+}
+
+const targetImg = (event) => {
+    //highlight hình ảnh
+    event.classList.toggle("my-style");
+    for (let nod of displayImage.childNodes) {
+        if (nod.firstElementChild !== event) {
+            nod.firstElementChild.classList.remove("my-style");
+        }
+    }
+
+    //active chức năng
+    if(!event.classList.contains("my-style")) {
+        btnChoseImg.disabled = true;
+        delImage.disabled = true;
+    } else {
+        btnChoseImg.disabled = false;
+        delImage.disabled = false;
+    }
+}
+
+delImage.addEventListener("click", async () => {
+    try {
+        for (let nod of displayImage.childNodes) {
+            if (nod.firstElementChild.classList.contains("my-style")) {
+                const url = nod.firstElementChild.src;
+                await axios.delete(url);
+                images = images.filter(i => !url.includes(i));
+                renderPaginationAndRenderImage(images);
+            }
         }
     } catch (error) {
         console.log(error);
     }
 })
 
-const targetImg = (event) => {
-    event.classList.toggle("my-style");
-    console.log(displayImage.childNodes)
-    for (let nod of displayImage.childNodes) {
-        if (nod.firstElementChild !== event) {
-            nod.firstElementChild.classList.remove("my-style");
+btnChoseImg.addEventListener("click", async () => {
+    try {
+        for (let nod of displayImage.childNodes) {
+            if (nod.firstElementChild.classList.contains("my-style")) {
+                const url = nod.firstElementChild.dataset.url;
+                await axios.put(`${API_URL}/users/${id}/update-avatar`, {
+                    avatar : url,
+                });
+                avtPreview.src = `http://localhost:8080${url}`;
+                modalImgEl.hide()
+            }
         }
+    } catch (error) {
+        console.log(error);
     }
-}
+})
+
+avatarEl.addEventListener("change", async (e) => {
+    try {
+        // Lấy ra file upload
+        const file = e.target.files[0];
+
+        // Tạo đối tượng form-data
+        const formData = new FormData();
+        formData.append("file", file);
+
+        // Gọi API
+        const res = await axios.post(`${API_URL}/users/${id}/files`, formData);
+
+        // Cập nhật UI
+        images.unshift(res.data);
+        renderPaginationAndRenderImage(images);
+    } catch (error) {
+        console.log(error)
+    }
+})
