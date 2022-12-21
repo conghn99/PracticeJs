@@ -3,6 +3,10 @@ import './App.css';
 import React from 'react'
 import Menu from './components/menu/Menu';
 import Counter from './components/counter/Counter';
+import Content from './components/content/Content';
+import List from './components/list/List';
+import Theme from './components/theme/Theme';
+import User from './components/user/User';
 
 function App() {
   const menus = [
@@ -24,6 +28,14 @@ function App() {
       <Menu menus={menus}/>
 
       <Counter />
+
+      <Content />
+
+      <List />
+
+      <Theme />
+
+      <User />
     </React.Fragment>
     // <div className="App">
     //   <header className="App-header">
