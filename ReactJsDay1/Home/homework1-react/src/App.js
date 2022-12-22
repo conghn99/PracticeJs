@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import User from './component/user/User';
 
 function App() {
     const [count, setCount] = useState(5);
@@ -28,7 +29,7 @@ function App() {
       '#e74c3c',
       '#2c3e50',
       '#d35400',
-  ]
+    ]
   return (
       <React.Fragment>
         <h1> JS DOM</h1>
@@ -40,6 +41,9 @@ function App() {
             <div key={color} className="box" style={{ backgroundColor : color }} onClick={remove}></div>
           ))}
         </div>
+
+        
+        <User />
       </React.Fragment>
   );
 }
