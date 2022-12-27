@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import TodoList from './component/todoList/TodoList';
 import User from './component/user/User';
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
     ]
   return (
       <React.Fragment>
-        <h1> JS DOM</h1>
+        {/* <h1> JS DOM</h1>
         <button id="btn" onClick={addBoxes}>More boxes</button>
         <h4 id="score"> Total box:<span className="points">{count}</span></h4>
 
@@ -43,7 +44,8 @@ function App() {
         </div>
 
         
-        <User />
+        <User /> */}
+        <TodoList />
       </React.Fragment>
   );
 }
