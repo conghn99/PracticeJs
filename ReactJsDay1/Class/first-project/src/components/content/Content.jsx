@@ -42,8 +42,7 @@ function Content() {
         <label htmlFor='cn'>CN</label>
         <input type="checkbox" value={"cn"} id="cn" checked={languages.includes("cn")} onChange={e => handleChooseLanguage(e.target.value)}/>
         <label htmlFor='jp'>JP</label>
-        <input type="checkbox" value={"jp"} id="jp" checked={languages.includes("jp")} onChange={e => handleChooseLanguage(e.target.value)}/>
-        
+        <input type="checkbox" value={"jp"} id="jp" checked={languages.includes("jp")} onChange={e => handleChooseLanguage(e.target.value)}/> 
     </div>
   )
 }
