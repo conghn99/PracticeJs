@@ -6,18 +6,13 @@
     <meta http-equiv=x-ua-compatible content="IE=edge">
     <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <meta name=robots content="index, follow">
-    <title>Search | Kong's Blog</title>
-    <meta name=keywords content>
-    <meta name=description content="Tìm kiếm bài viết">
-    <meta name=author content>
-    <link rel=canonical href=search.html />
+    <title>About | Kong's Blog</title>
     <link crossorigin=anonymous
         href=stylesheet.6bdb0a069bdb44c7d420a0727488386177027ce75e9e90406fe48ca0eb173b48.css
         rel="preload stylesheet" as=style>
-    <link crossorigin=anonymous rel=preload as=fetch href=../index.json>
     <script defer crossorigin=anonymous
-        src=search.a726f5ae79d9ee16a1a69329478f791555cddf446990c945128bb2ac63c32b5a.js>
-    </script>
+        src=highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js
+        onload=hljs.initHighlightingOnLoad()></script>
     <link rel=icon href=img/umaru.PNG>
     <link rel=icon type=image/png sizes=16x16 href=img/umaru.PNG>
     <link rel=icon type=image/png sizes=32x32 href=img/umaru.PNG>
@@ -63,7 +58,7 @@
     <script>var doNotTrack = !1; if (!doNotTrack) { window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments) } gtag("js", new Date), gtag("config", "G-5KF148C0X6", { anonymize_ip: !1 }) }</script>
 </head>
 
-<body class="list" id="top">
+<body id="top">
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous"
         src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v15.0&appId=3104649079824969&autoLogAppEvents=1"
@@ -91,28 +86,42 @@
                         </svg></button></div>
             </div>
             <ul id="menu">
-                <li><a href="search.html" title="Search (Alt + /)" accesskey="" /><span class="active">Search</span></a></li>
+                <li><a href="search.html" title="Search (Alt + /)" accesskey="" /><span>Search</span></a></li>
                 <li><a href="tag.html" title="Tags"><span>Tags</span></a></li>
                 <li><a href="project.html" title="Projects"><span>Projects</span></a></li>
                 <li><a href="slide.html" title="Slides"><span>Slides</span></a></li>
-                <li><a href="about.html" title="About"><span>About</span></a></li>
+                <li><a href="about.html" title="About"><span class="active">About</span></a></li>
             </ul>
         </nav>
     </header>
     <main class="main">
-        <header class="page-header">
-            <h1>Search <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
-                    stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8" />
-                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                </svg></h1>
-            <div class="post-description">Tìm kiếm bài viết</div>
-            <div class="post-meta"></div>
-        </header>
-        <div id="searchbox"><input id="searchInput" autofocus placeholder="Tìm kiếm bài viết" aria-label="search" type="search"
-                autocomplete="off">
-            <ul id="searchResults" aria-label="search results"></ul>
-        </div>
+        <article class="post-single">
+            <header class="post-header">
+                <h1 class="post-title">About</h1>
+            </header>
+            <div class="post-content">
+                <p>Hi there 👋</p>
+                <p>Cảm ơn bạn đã ghé thăm blog của mình, một blog về công nghệ (chủ yếu là lập trình), nhưng cũng có thể
+                    có nhiều bài viết linh tinh nhảm nhí tùy tâm trạng.</p>
+                <p>Hy vọng các bài viết ở đây sẽ giúp phần nào cho công việc của các bạn (nếu bạn là lập trình viên),
+                    hoặc ít nhất nó cũng giúp bạn giải trí sau những giờ làm việc căng thẳng 😎.</p>
+                <p><img loading="lazy" src="img/bocchi.jpg" alt="Wibu"></p>
+                <hr>
+                <p>Blog vừa được tạo, sử dụng tool <a href="https://gohugo.io" target="_blank" rel="nofollow">GoHugo</a>
+                    và theme <a href="https://github.com/adityatelange/hugo-PaperMod" target="_blank"
+                        rel="nofollow">PaperMod</a>
+                    .
+                    Tuy nhiên các bạn sẽ thấy có những bài được publish từ &mldr; 2015 😅 (ảo chưa fen).
+                    Nếu bạn muốn tự xây dựng một website (blog) cá nhân tương tự như website này (và hoàn toàn miễn phí)
+                    thì có thể tham khảo bài viết <a
+                        href="https://huydq.dev/blog/cach-tao-mot-trang-blog-ca-nhan-mien-phi-danh-cho-dev" />Cách tạo một
+                    trang blog cá nhân miễn phí dành cho dev</a>.</p>
+                <p>Have fun!</p>
+            </div>
+            <footer class="post-footer">
+                <ul class="post-tags"></ul>
+            </footer>
+        </article>
     </main>
     <footer class="footer"><span>Cong Do &copy; 2023</span>
         <span class="social-icons"><a href="https://github.com/conghn99" aria-label="Github">
@@ -155,6 +164,7 @@
     <script>let menu = document.getElementById("menu"); menu && (menu.scrollLeft = localStorage.getItem("menu-scroll-position"), menu.onscroll = function () { localStorage.setItem("menu-scroll-position", menu.scrollLeft) }), document.querySelectorAll('a[href^="#"]').forEach(e => { e.addEventListener("click", function (t) { t.preventDefault(); var e = this.getAttribute("href").substr(1); window.matchMedia("(prefers-reduced-motion: reduce)").matches ? document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView() : document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView({ behavior: "smooth" }), e === "top" ? history.replaceState(null, null, " ") : history.pushState(null, null, `#${e}`) }) })</script>
     <script>var mybutton = document.getElementById("top-link"); window.onscroll = function () { document.body.scrollTop > 800 || document.documentElement.scrollTop > 800 ? (mybutton.style.visibility = "visible", mybutton.style.opacity = "1") : (mybutton.style.visibility = "hidden", mybutton.style.opacity = "0") }</script>
     <script>document.getElementById("theme-toggle").addEventListener("click", () => { document.body.className.includes("dark") ? (document.body.classList.remove("dark"), localStorage.setItem("pref-theme", "light")) : (document.body.classList.add("dark"), localStorage.setItem("pref-theme", "dark")) })</script>
+    <script>document.querySelectorAll("pre > code").forEach(t => { const n = t.parentNode.parentNode, e = document.createElement("button"); e.classList.add("copy-code"), e.innerHTML = "Sao chép"; function s() { e.innerHTML = "Đã sao chép!", setTimeout(() => { e.innerHTML = "Sao chép" }, 2e3) } e.addEventListener("click", o => { if ("clipboard" in navigator) { navigator.clipboard.writeText(t.textContent), s(); return } const e = document.createRange(); e.selectNodeContents(t); const n = window.getSelection(); n.removeAllRanges(), n.addRange(e); try { document.execCommand("copy"), s() } catch (e) { } n.removeRange(e) }), n.classList.contains("highlight") ? n.appendChild(e) : n.parentNode.firstChild == n || (t.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE" ? t.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(e) : t.parentNode.appendChild(e)) })</script>
     <script src="toc.min.js"></script>
 </body>
 
