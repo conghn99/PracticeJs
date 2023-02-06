@@ -1,0 +1,15 @@
+action : {
+    type : Loại action (bắt buộc)
+    payload : dữ liệu để thay đổi state (optional)
+}
+
+Function tạp ra action => action creator
+
+
+
+reducer :
+- Là function có 2 tham số : state hiện tại, action
+- Phụ thuộc vào type, payload để thay đổi state
+- Khi state thay đổi => UI sẽ tự động dc cập nhật lại
+
+store : quản lý nhiều reducer
