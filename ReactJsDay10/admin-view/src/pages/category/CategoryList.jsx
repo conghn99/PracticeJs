@@ -1,19 +1,65 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import { useGetBlogsQuery } from '../../app/services/blog.service'
-import { formatDate } from '../../utils/functionUtils';
+import { useDeleteCategoryMutation, useGetCategoriesQuery, useUpdateCategoryMutation } from '../../app/services/categories.service'
 
-function BlogList() {
-    const { data, isLoading } = useGetBlogsQuery();
+function CategoryList() {
+    const {data, isLoading} = useGetCategoriesQuery();
+    const [updateCategory] = useUpdateCategoryMutation();
+    const [deleteCategory] = useDeleteCategoryMutation();
+
     if (isLoading) {
         return <h2>Loading....</h2>
     }
-    return (
+    
+    const handleUpdateCategory = (id, name) => {
+        const newTitle = window.prompt("Cập nhật tiêu đề", name);
+
+        if(newTitle === null) {
+            return;
+        }
+
+        if (newTitle.trim() === "") {
+            alert("Tiêu đề không được để trống");
+            return;
+        }
+        
+        const data1 = {
+            id,
+            newTitle
+        }
+
+        console.log(data1)
+
+        updateCategory(data1)
+            .unwrap()
+            .then(() => {
+                alert("Cap nhat thanh cong")
+            })
+            .catch((err) => {
+                alert(err)
+            })
+    }
+
+    const handleDeleteCategory = (id) => {
+        if (window.confirm("Ban co chac muon xoa khum?")) {
+            deleteCategory(id)
+                .unwrap()
+                .then(() => {
+                    alert("Xoa thanh cong")
+                })
+                .catch((err) => {
+                    alert(err)
+                })
+        }
+    }
+
+    
+  return (
+    <>
         <div className="container-fluid">
             <div className="row py-2">
                 <div className="col-12">
                     <button type="button" className="btn btn-primary">
-                        <i className="fas fa-plus"></i> Viết bài
+                        <i className="fas fa-plus"></i> Thêm danh mục
                     </button>
                     <button type="button" className="btn btn-info">
                         <i className="fas fa-redo"></i> Refresh
@@ -27,30 +73,23 @@ function BlogList() {
                             <table className="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Tiêu đề</th>
-                                        <th>Tác giả</th>
-                                        <th>Danh mục</th>
-                                        <th>Trạng thái</th>
-                                        <th>Ngày tạo</th>
+                                        <th>Tên danh mục</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data.length > 0 && data.map((b, i) => (
-                                        <tr key={i}>
+                                    {data.length > 0 && data.map((b) => (
+                                        <tr key={b.id}>
                                             <td>
-                                                <Link to={`/admin/blogs/${b.id}`}>{b.title}</Link>
+                                                {b.name}
                                             </td>
                                             <td>
-                                                <Link to={`/admin/users/${b.user.id}`}>{b.user.name}</Link>
-                                            </td>
-                                            <td>
-                                                {b.categories.map(c => c.name).join(", ")}
-                                            </td>
-                                            <td>
-                                                {b.status ? "Cong khai" : "Nhap"}
-                                            </td>
-                                            <td>
-                                                {formatDate(b.createdAt)}
+                                                <button className="btn btn-info" onClick={() => handleUpdateCategory(b.id, b.name)}>
+                                                    Update
+                                                </button>
+                                                <button className="btn btn-danger" onClick={() => handleDeleteCategory(b.id)}>
+                                                    Delete
+                                                </button>
                                             </td>
                                         </tr>
                                     ))}
@@ -99,7 +138,8 @@ function BlogList() {
                 </div>
             </div>
         </div>
-    )
+    </>
+  )
 }
 
-export default BlogList
+export default CategoryList

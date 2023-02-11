@@ -7,7 +7,20 @@ export const categoryApi = createApi({
       getCategories: builder.query({
         query: () => `categories`,
       }),
+      updateCategory: builder.mutation({
+        query: ({id, ...data}) => ({
+            url : `categories/${id}`,
+            method: "PUT",
+            body: data
+        })
+      }),
+      deleteCategory: builder.mutation({
+        query: (id) => ({
+            url: `categories/${id}`,
+            method: "DELETE"
+        })
+      })
     }),
 })
 
-export const { useGetCategoriesQuery } = categoryApi
+export const { useGetCategoriesQuery, useUpdateCategoryMutation, useDeleteCategoryMutation } = categoryApi

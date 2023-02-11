@@ -21,7 +21,7 @@ export const blogApi = createApi({
         })
       }),
       updateBlog: builder.mutation({
-        query: (id, data) => ({
+        query: ({id, ...data}) => ({
             url : `blogs/${id}`,
             method: "PUT",
             body: data
