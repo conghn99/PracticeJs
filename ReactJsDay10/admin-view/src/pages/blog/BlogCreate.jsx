@@ -3,7 +3,7 @@ import SimpleMdeReact from 'react-simplemde-editor'
 import { useGetCategoriesQuery } from '../../app/services/categories.service'
 import Select from 'react-select'
 import { useCreateBlogMutation } from '../../app/services/blog.service';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function BlogCreate() {
     const { data: categories, isLoading} = useGetCategoriesQuery();
@@ -14,15 +14,16 @@ function BlogCreate() {
     const [categoryId, setCategoryIds] = useState([])
 
     const[createBlog] = useCreateBlogMutation()
+    const navigate = useNavigate()
 
     const handleAddBlog = () => {
         const newBlog = {title, content, description, status, categoryId}
         createBlog(newBlog)
-            .unwrap
+            .unwrap()
             .then(() => {
                 alert("Tao blog thanh cong")
                 setTimeout(() => {
-                    Navigate("/admin/blogs")
+                    navigate("/admin/blogs")
                 }, 1000)
             })
             .catch((err) => {
@@ -41,17 +42,18 @@ function BlogCreate() {
             label: c.name
         }
     })
+    
     if (isLoading) {
         return <h2>Loading...</h2>
     }
     return (
         <div className="container-fluid">
             <div className="row py-2">
-                <div class="col-6">
+                <div className="col-6">
                     <button type="button" className="btn btn-default">
-                        <i class="fas fa-chevron-left"></i> Quay lại
+                        <i className="fas fa-chevron-left"></i> Quay lại
                     </button>
-                    <button type="button" className="btn btn-info px-4">
+                    <button type="button" className="btn btn-info px-4" onClick={handleAddBlog}>
                         Lưu
                     </button>
                     <button type="button" className="btn btn-primary px-4">
@@ -59,7 +61,7 @@ function BlogCreate() {
                     </button>
                 </div>
 
-                <div class="col-6 d-flex justify-content-end">
+                <div className="col-6 d-flex justify-content-end">
                     <button type="button" className="btn btn-danger px-4">
                         Xóa
                     </button>
