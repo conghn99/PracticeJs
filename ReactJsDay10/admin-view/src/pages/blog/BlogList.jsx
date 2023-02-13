@@ -2,9 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { useGetBlogsQuery } from '../../app/services/blog.service'
 import { formatDate } from '../../utils/functionUtils';
+import { useNavigate } from 'react-router-dom';
 
 function BlogList() {
     const { data, isLoading } = useGetBlogsQuery();
+    const navigate = useNavigate()
+
     if (isLoading) {
         return <h2>Loading....</h2>
     }
@@ -12,7 +15,7 @@ function BlogList() {
         <div className="container-fluid">
             <div className="row py-2">
                 <div className="col-12">
-                    <button type="button" className="btn btn-primary">
+                    <button type="button" className="btn btn-primary" onClick={() => navigate("/admin/blogs/create")}>
                         <i className="fas fa-plus"></i> Viết bài
                     </button>
                     <button type="button" className="btn btn-info">

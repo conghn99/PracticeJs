@@ -50,7 +50,7 @@ function BlogCreate() {
         <div className="container-fluid">
             <div className="row py-2">
                 <div className="col-6">
-                    <button type="button" className="btn btn-default">
+                    <button type="button" className="btn btn-default" onClick={() => navigate("/admin/blogs")}>
                         <i className="fas fa-chevron-left"></i> Quay lại
                     </button>
                     <button type="button" className="btn btn-info px-4" onClick={handleAddBlog}>

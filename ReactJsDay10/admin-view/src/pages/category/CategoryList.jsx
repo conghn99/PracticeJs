@@ -10,21 +10,21 @@ function CategoryList() {
         return <h2>Loading....</h2>
     }
     
-    const handleUpdateCategory = (id, name) => {
-        const newTitle = window.prompt("Cập nhật tiêu đề", name);
+    const handleUpdateCategory = (id, cateName) => {
+        const name = window.prompt("Cập nhật tiêu đề", cateName);
 
-        if(newTitle === null) {
+        if(name === null) {
             return;
         }
 
-        if (newTitle.trim() === "") {
+        if (name.trim() === "") {
             alert("Tiêu đề không được để trống");
             return;
         }
         
         const data1 = {
             id,
-            newTitle
+            name
         }
 
         console.log(data1)
@@ -33,6 +33,7 @@ function CategoryList() {
             .unwrap()
             .then(() => {
                 alert("Cap nhat thanh cong")
+                window.location.reload();
             })
             .catch((err) => {
                 alert(err)
@@ -45,6 +46,7 @@ function CategoryList() {
                 .unwrap()
                 .then(() => {
                     alert("Xoa thanh cong")
+                    window.location.reload();
                 })
                 .catch((err) => {
                     alert(err)
