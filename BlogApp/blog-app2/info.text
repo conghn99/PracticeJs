@@ -1,0 +1,9 @@
+// phan trang
+
+{
+    data: // du lieu tren 1 trang
+    currentpage: // trang hien tai
+    pageSize:// so item tren 1 trang
+    totalpage: // tong so trang
+    totalElement: // so luong phan tu
+}
