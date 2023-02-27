@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import Layout from './component/Layout/Layout'
+import Login from './login/Login'
 import BlogDetail from './pages/blog/BlogDetail'
 import Home from './pages/home/Home'
 import Search from './pages/search/Search'
@@ -20,6 +21,7 @@ function App() {
             <Route path=':tagId/:tagName' element={<TagDetail />}></Route>
           </Route>
         </Route>
+        <Route path="/admin/login" element={<Login />} />
       </Routes>
     </>
   )
